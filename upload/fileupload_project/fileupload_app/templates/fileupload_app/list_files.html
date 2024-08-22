@@ -1,0 +1,34 @@
+<!-- fileupload_app/templates/fileupload_app/list_files.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List of Uploaded Files</title>
+</head>
+
+<body>
+    <h1>Uploaded Files</h1>
+
+    <!-- نموذج البحث -->
+    <form method="GET" action="{% url 'list_files' %}">
+        <input type="text" name="q" placeholder="Search files..." value="{{ query }}">
+        <button type="submit">Search</button>
+    </form>
+
+    <!-- قائمة الملفات -->
+    <ul>
+        {% for file in files %}
+        <li><a href="{{ file.file.url }}">{{ file.file.name }}</a></li>
+        {% empty %}
+        <li>No files found.</li>
+        {% endfor %}
+    </ul>
+
+    <!-- رابط العودة لتحميل ملف جديد -->
+    <p><a href="{% url 'upload_file' %}">Upload a new file</a></p> <!-- رابط للانتقال إلى صفحة تحميل الملفات -->
+</body>
+
+</html>
